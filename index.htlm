@@ -20,14 +20,13 @@
         @media print { .no-print { display: none; } }
         .animate-fade-in { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Hiệu ứng loading cho nút gửi */
-        .loading { cursor: not-allowed; opacity: 0.7; }
+        .loading-spinner { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="bg-slate-100 py-8 px-4 flex flex-col items-center min-h-screen">
 
-    <!-- Thanh công cụ hỗ trợ -->
+    <!-- Thanh công cụ -->
     <div class="max-w-2xl w-full mb-6 flex gap-4 no-print text-sm">
         <button onclick="downloadInfographic()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-all transform hover:scale-105">
             <i class="fas fa-file-image text-xl"></i>
@@ -36,9 +35,7 @@
     </div>
 
     <!-- Container Infographic chính -->
-    <div id="infographic-main" class="max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden relative">
-        
-        <!-- Header Section -->
+    <div id="infographic-main" class="max-w-2xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden relative border border-gray-200">
         <div class="bg-pattern text-white text-center py-10 px-6 relative">
             <div class="absolute top-4 left-4 bg-white/20 px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase">
                 Công đoàn Ban Khai thác mạng
@@ -48,12 +45,8 @@
             <h1 class="font-heading text-3xl md:text-5xl font-extrabold leading-tight mb-4 text-yellow-300 drop-shadow-md">
                 NÉT ĐẸP TRONG LAO ĐỘNG <br/> <span class="text-white text-2xl md:text-4xl">& CUỘC SỐNG GIA ĐÌNH</span>
             </h1>
-            <p class="text-blue-100 text-sm md:text-base max-w-lg mx-auto mb-4 italic">
-                "Tôn vinh tinh thần cống hiến và giá trị hạnh phúc gia đình VNPT"
-            </p>
         </div>
 
-        <!-- Timeline & Target -->
         <div class="flex flex-col md:flex-row bg-blue-50 border-b border-blue-100">
             <div class="flex-1 py-4 px-6 border-b md:border-b-0 md:border-r border-blue-200 flex items-center justify-center gap-3">
                 <div class="bg-blue-600 text-white p-3 rounded-full h-10 w-10 flex items-center justify-center shadow">
@@ -61,7 +54,7 @@
                 </div>
                 <div>
                     <p class="text-[10px] text-gray-500 uppercase font-bold">Thời gian nhận bài</p>
-                    <p class="font-heading font-bold text-blue-800">08/5 - 18/5/2026</p>
+                    <p class="font-heading font-bold text-blue-800 text-sm">08/5 - 18/5/2026</p>
                 </div>
             </div>
             <div class="flex-1 py-4 px-6 flex items-center justify-center gap-3">
@@ -75,189 +68,74 @@
             </div>
         </div>
 
-        <!-- CHỦ ĐỀ DỰ THI -->
-        <div class="py-8 px-6 md:px-10">
-            <h3 class="font-heading text-xl font-bold text-center text-gray-800 mb-6 uppercase tracking-wide border-b-2 border-blue-600 w-fit mx-auto pb-1">Chủ đề dự thi</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-orange-50 border-l-4 border-orange-500 p-4 rounded-r-lg shadow-sm">
-                    <div class="flex items-center gap-2 mb-2">
-                        <i class="fas fa-hard-hat text-orange-500 text-xl"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Nét đẹp lao động</h4>
-                    </div>
-                    <p class="text-[11px] text-gray-600 leading-relaxed italic">Lao động an toàn, tuân thủ quy trình, sáng tạo và chuyên nghiệp tại các vị trí công tác.</p>
-                </div>
-                <div class="bg-pink-50 border-l-4 border-pink-500 p-4 rounded-r-lg shadow-sm">
-                    <div class="flex items-center gap-2 mb-2">
-                        <i class="fas fa-home text-pink-500 text-xl"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Hạnh phúc gia đình</h4>
-                    </div>
-                    <p class="text-[11px] text-gray-600 leading-relaxed italic">Khoảnh khắc bình yên, sự quan tâm chia sẻ trong đời sống thường ngày của đoàn viên.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- YÊU CẦU TÁC PHẨM -->
         <div class="py-6 px-6 md:px-10 bg-white border-t border-gray-100">
             <h3 class="font-heading text-lg font-bold text-[#1e293b] mb-4 flex items-center gap-2 uppercase tracking-wide">
                 <i class="fas fa-file-contract text-blue-600"></i> Yêu cầu tác phẩm
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-[11px] text-gray-700">
-                <div class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>Định dạng: <strong>.png</strong> hoặc <strong>.jpg</strong>; tối thiểu <strong>1.920 pixel</strong>.</span>
-                </div>
-                <div class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>Dung lượng tối đa <strong>10MB</strong>. Không chấp nhận ảnh tạo bằng AI.</span>
-                </div>
-                <div class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>Chỉnh sửa sáng/màu được phép nhưng không làm thay đổi bản chất nội dung.</span>
-                </div>
-                <div class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>Ưu tiên trang phục thương hiệu <strong>VNPT</strong>, lịch sự, đúng thuần phong mỹ tục.</span>
-                </div>
+                <div class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i><span>Định dạng: .png hoặc .jpg; tối thiểu 1.920 pixel.</span></div>
+                <div class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i><span>Dung lượng tối đa 10MB. Không dùng ảnh AI.</span></div>
+                <div class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i><span>Mỗi CĐBP gửi tối đa 06 tác phẩm (3 LĐ & 3 GĐ).</span></div>
+                <div class="flex items-start gap-2"><i class="fas fa-check text-green-500 mt-1"></i><span>Ưu tiên trang phục thương hiệu VNPT, lịch sự.</span></div>
             </div>
         </div>
 
-        <!-- CƠ CẤU GIẢI THƯỞNG -->
-        <div class="bg-gray-50/50 py-10 px-6 md:px-10 border-t border-gray-100">
-            <h3 class="font-heading text-xl font-bold text-center text-[#1e293b] mb-8 uppercase tracking-wide">Giải thưởng cấp Ban</h3>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between bg-white rounded-2xl border-2 border-[#fcd34d] p-5 shadow-sm">
-                    <div class="flex items-center gap-4">
-                        <div class="bg-[#fef3c7] text-[#b45309] h-14 w-14 rounded-full flex items-center justify-center text-2xl shadow-inner">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <span class="text-xl font-bold text-[#1e293b]">01 Giải Nhất</span>
-                    </div>
-                    <div class="text-2xl font-heading font-extrabold text-[#b45309]">2.000.000đ</div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex items-center justify-between bg-white rounded-2xl border border-gray-200 p-4 shadow-sm">
-                        <div class="flex items-center gap-3">
-                            <div class="bg-gray-100 text-gray-500 h-10 w-10 rounded-full flex items-center justify-center text-lg">
-                                <i class="fas fa-medal"></i>
-                            </div>
-                            <span class="font-bold text-sm text-[#1e293b]">02 Giải Nhì</span>
-                        </div>
-                        <div class="font-heading font-bold text-[#1e293b]">1.500.000đ</div>
-                    </div>
-                    <div class="flex items-center justify-between bg-white rounded-2xl border border-[#fed7aa] p-4 shadow-sm">
-                        <div class="flex items-center gap-3">
-                            <div class="bg-[#ffedd5] text-[#c2410c] h-10 w-10 rounded-full flex items-center justify-center text-lg">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <span class="font-bold text-sm text-[#1e293b]">05 Giải Ba</span>
-                        </div>
-                        <div class="font-heading font-bold text-[#c2410c]">1.000.000đ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="footer-bg text-white py-8 px-8 md:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-3">
-                    <h4 class="font-heading font-extrabold text-blue-400 uppercase text-[10px]">Đầu mối nộp bài</h4>
-                    <p class="text-gray-300 text-[11px]">Các CĐBP tổng hợp bài dự thi gửi về Công đoàn Ban KTM.</p>
-                    <p class="text-[#facc15] font-bold italic text-[10px] leading-snug">*(Mỗi CĐBP tối đa 06 tác phẩm: 3 LĐ & 3 GĐ)*</p>
-                </div>
-                <div class="space-y-2">
-                    <h4 class="font-heading font-extrabold text-blue-400 uppercase text-[10px]">Hỗ trợ kỹ thuật</h4>
-                    <p class="text-sm font-bold">Đ/c Hà Minh Hoàng</p>
-                    <p class="text-gray-400 text-[11px]">SĐT: 0914.746.789 | Email: haminhhoang@vnpt.vn</p>
-                </div>
-            </div>
+        <div class="footer-bg text-white py-8 px-8 md:px-12 text-center">
+            <p class="text-blue-400 font-bold text-xs uppercase tracking-tighter">Hỗ trợ kỹ thuật: Đ/c Hà Minh Hoàng - 0914.746.789</p>
         </div>
     </div>
 
-    <!-- AI SUBMISSION ASSISTANT -->
+    <!-- HỆ THỐNG NỘP BÀI -->
     <div class="max-w-2xl w-full mt-10 space-y-6 no-print">
         <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-blue-500 ai-glow">
-            <div class="bg-blue-600 p-4 text-white flex items-center justify-between shadow-md">
+            <div class="bg-blue-600 p-4 text-white flex items-center justify-between">
                 <h3 class="font-heading font-bold uppercase tracking-widest flex items-center gap-2">
                     <i class="fas fa-magic"></i> Trợ lý AI - Nộp bài trực tuyến
                 </h3>
-                <span class="bg-blue-400/30 px-3 py-1 rounded-full text-[10px] font-bold">ONLINE SUBMIT</span>
+                <div class="text-[10px] bg-blue-800 px-2 py-1 rounded">CLOUD V2.1</div>
             </div>
             
             <div class="p-6 space-y-6">
-                <!-- Bước 1: Thông tin người dự thi -->
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold text-blue-800 uppercase flex items-center gap-2">
-                        <span class="bg-blue-100 w-5 h-5 rounded-full flex items-center justify-center text-[10px]">1</span> 
-                        Thông tin tác giả & Đơn vị
-                    </h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">Tên tác giả *</label>
-                            <input id="author-name" type="text" placeholder="Nhập họ và tên..." class="w-full px-4 py-2 border border-gray-200 rounded-xl outline-none focus:border-blue-500 transition-all">
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">CĐBP *</label>
-                            <select id="author-unit" class="w-full px-4 py-2 border border-gray-200 rounded-xl outline-none focus:border-blue-500 bg-white">
-                                <option value="">-- Chọn đơn vị --</option>
-                                <option value="NOC1">NOC1</option><option value="NOC2">NOC2</option><option value="NOC3">NOC3</option>
-                                <option value="KHKT">KHKT</option><option value="NSHC">NSHC</option><option value="ANM">ANM</option>
-                                <option value="SOC">SOC</option><option value="NMC">NMC</option>
-                            </select>
-                        </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">Tên tác giả *</label>
+                        <input id="author-name" type="text" placeholder="Họ và tên..." class="w-full px-4 py-2 border border-gray-200 rounded-xl outline-none focus:border-blue-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">CĐBP *</label>
+                        <select id="author-unit" class="w-full px-4 py-2 border border-gray-200 rounded-xl outline-none focus:border-blue-500 bg-white transition-colors">
+                            <option value="">-- Chọn đơn vị --</option>
+                            <option value="NOC1">NOC1</option><option value="NOC2">NOC2</option><option value="NOC3">NOC3</option>
+                            <option value="KHKT">KHKT</option><option value="NSHC">NSHC</option><option value="ANM">ANM</option>
+                            <option value="SOC">SOC</option><option value="NMC">NMC</option>
+                        </select>
                     </div>
                 </div>
 
-                <!-- Bước 2: Tải ảnh -->
-                <div class="space-y-4">
-                    <h4 class="text-xs font-bold text-blue-800 uppercase flex items-center gap-2">
-                        <span class="bg-blue-100 w-5 h-5 rounded-full flex items-center justify-center text-[10px]">2</span> 
-                        Tải lên ảnh dự thi
-                    </h4>
-                    <div id="drop-area" class="border-2 border-dashed border-blue-100 rounded-2xl p-6 text-center bg-blue-50/20 hover:bg-blue-50 transition-all cursor-pointer relative overflow-hidden group">
-                        <input type="file" id="file-input" accept="image/*" class="hidden" onchange="handleFileUpload(this)">
-                        <label for="file-input" class="cursor-pointer block">
-                            <i class="fas fa-image text-4xl text-blue-300 group-hover:text-blue-500 transition-colors mb-2"></i>
-                            <p class="text-sm text-gray-500 font-medium">Chọn ảnh gửi về Drive</p>
-                        </label>
-                        <div id="image-preview" class="mt-4 hidden">
-                            <img id="preview-img" src="" class="max-h-56 mx-auto rounded-xl shadow-lg border-4 border-white">
-                        </div>
+                <div id="drop-area" class="border-2 border-dashed border-blue-100 rounded-2xl p-8 text-center bg-blue-50/20 cursor-pointer hover:bg-blue-50 transition-all group">
+                    <input type="file" id="file-input" accept="image/*" class="hidden" onchange="handleFileUpload(this)">
+                    <label for="file-input" class="cursor-pointer block">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-blue-400 mb-2 group-hover:scale-110 transition-transform"></i>
+                        <p class="text-sm text-gray-600 font-medium">Nhấn để chọn hoặc kéo thả ảnh dự thi</p>
+                    </label>
+                    <div id="image-preview" class="mt-4 hidden">
+                        <img id="preview-img" src="" class="max-h-64 mx-auto rounded-xl shadow-lg border-4 border-white">
                     </div>
                 </div>
 
-                <!-- Bước 3: Thông tin bài dự thi -->
                 <div id="ai-analysis" class="hidden space-y-4 animate-fade-in bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                    <div class="flex items-center justify-between">
-                        <h4 class="text-xs font-bold text-blue-800 uppercase flex items-center gap-2">
-                            <span class="bg-blue-200 w-5 h-5 rounded-full flex items-center justify-center text-[10px]">3</span> 
-                            Chi tiết tác phẩm
-                        </h4>
-                        <div id="ai-status" class="flex items-center gap-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-lg">
-                            <i class="fas fa-magic animate-pulse"></i> AI Gợi ý nội dung
-                        </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">Tiêu đề tác phẩm dự kiến</label>
+                        <input id="photo-title" type="text" placeholder="Tên tác phẩm..." class="w-full bg-white px-3 py-2 border border-gray-200 rounded-lg text-sm font-bold shadow-sm focus:border-blue-400 outline-none">
                     </div>
-
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Chủ đề</label>
-                                <span id="ai-category-badge" class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide"></span>
-                            </div>
-                            <div>
-                                <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Tên tác phẩm *</label>
-                                <input id="photo-title" type="text" placeholder="Tên ảnh..." class="w-full bg-white px-3 py-2 border border-gray-200 rounded-lg text-sm font-bold text-gray-800 outline-none focus:ring-2 focus:ring-blue-400">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-[10px] font-bold text-gray-500 uppercase block mb-1">Lời bình về tác phẩm *</label>
-                            <textarea id="photo-caption" rows="4" class="w-full bg-white px-3 py-2 border border-gray-200 rounded-lg text-sm text-gray-700 outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-                        </div>
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-400 uppercase mb-1 block">Lời bình (AI gợi ý)</label>
+                        <textarea id="photo-caption" rows="3" placeholder="Lời bình..." class="w-full bg-white px-3 py-2 border border-gray-200 rounded-lg text-sm shadow-sm focus:border-blue-400 outline-none"></textarea>
                     </div>
                 </div>
 
-                <button onclick="submitEntry()" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-blue-100 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
-                    <i class="fas fa-cloud-upload-alt"></i> NỘP BÀI VÀ LƯU VÀO DRIVE
+                <button onclick="submitEntry()" id="btn-submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-xl transition-all flex items-center justify-center gap-3 transform active:scale-95">
+                    <i class="fas fa-paper-plane"></i> GỬI BÀI DỰ THI NGAY
                 </button>
             </div>
         </div>
@@ -266,46 +144,56 @@
     <!-- Modal thành công -->
     <div id="success-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
         <div class="bg-white rounded-3xl p-10 max-w-sm w-full text-center shadow-2xl animate-fade-in">
-            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
                 <i class="fas fa-check"></i>
             </div>
-            <h4 class="text-xl font-heading font-bold text-slate-800 mb-2">Đã nhận bài dự thi!</h4>
-            <p class="text-slate-500 text-sm mb-6">Ảnh của bạn đã được chuyển thẳng vào Drive ban tổ chức. Cảm ơn đồng chí!</p>
-            <button onclick="closeModal()" class="w-full bg-slate-800 text-white font-bold py-3 rounded-xl hover:bg-black transition-colors">Đóng</button>
+            <h4 class="text-xl font-bold mb-2 text-slate-800">Đã nhận bài thi!</h4>
+            <p class="text-slate-500 text-sm mb-6 leading-relaxed">Tác phẩm của đồng chí đang được tải lên Google Drive của Ban Tổ chức. Cảm ơn đồng chí đã tham gia!</p>
+            <button onclick="location.reload()" class="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 shadow-lg font-bold">Nộp bài khác</button>
         </div>
     </div>
 
     <script>
+        // API KEY và URL APPS SCRIPT MỚI
         const apiKey = ""; 
-        // DÁN WEB APP URL CỦA BẠN VÀO ĐÂY SAU KHI DEPLOY GOOGLE SCRIPT
-        const GOOGLE_SCRIPT_URL = "URL_WEB_APP_CUA_BAN"; 
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfwUKyJwWB8GH6s8QWE2RaMJ4prfbWfiVnWSYfQ9BGWhhWQcdQWgodEfboqrMVMXQQ/exec"; 
+        
         let currentImageData = null;
 
+        // Hàm gọi AI phân tích ảnh
         async function callGemini(prompt, isImage = false, imageData = null) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             let contents = [{ parts: [{ text: prompt }] }];
             if (isImage && imageData) {
                 contents[0].parts.push({ inlineData: { mimeType: "image/png", data: imageData.split(',')[1] } });
             }
-
-            const payload = {
-                contents: contents,
-                systemInstruction: { parts: [{ text: "Phân tích ảnh cuộc thi VNPT. Trả JSON: { category, title, caption }." }] },
-                generationConfig: { responseMimeType: "application/json" }
-            };
-
             try {
-                const response = await fetch(url, { method: 'POST', body: JSON.stringify(payload) });
-                const result = await response.json();
-                return JSON.parse(result.candidates[0].content.parts[0].text);
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        contents: contents,
+                        generationConfig: { responseMimeType: "application/json" },
+                        systemInstruction: { parts: [{ text: "Bạn là trợ lý cho cuộc thi ảnh VNPT KTM. Hãy phân tích ảnh và trả về JSON: { title: 'Tiêu đề ngắn gọn', caption: 'Lời bình ý nghĩa về lao động hoặc gia đình' }. Ngôn ngữ: Tiếng Việt." }] }
+                    })
+                });
+                const res = await response.json();
+                return JSON.parse(res.candidates[0].content.parts[0].text);
             } catch (e) {
-                return { category: "Nét đẹp lao động", title: "Tác phẩm dự thi", caption: "Bức ảnh ghi lại khoảnh khắc lao động ý nghĩa của tôi tại đơn vị." };
+                return { title: "Khoảnh khắc Ban KTM", caption: "Bức ảnh dự thi đầy ý nghĩa của cán bộ nhân viên." };
             }
         }
 
+        // Xử lý khi chọn file
         async function handleFileUpload(input) {
             const file = input.files[0];
             if (!file) return;
+
+            if (file.size > 10 * 1024 * 1024) {
+                alert("Dung lượng ảnh vượt quá 10MB. Vui lòng chọn ảnh khác.");
+                input.value = "";
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = async (e) => {
                 currentImageData = e.target.result;
@@ -313,78 +201,73 @@
                 document.getElementById('image-preview').classList.remove('hidden');
                 document.getElementById('ai-analysis').classList.remove('hidden');
                 
-                const analysis = await callGemini("Gợi ý nội dung cho ảnh dự thi này.", true, currentImageData);
+                document.getElementById('photo-title').placeholder = "AI đang phân tích ảnh...";
+                document.getElementById('photo-caption').placeholder = "AI đang soạn lời bình...";
                 
-                const catBadge = document.getElementById('ai-category-badge');
-                catBadge.innerText = analysis.category;
-                catBadge.className = "inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide " + 
-                                    (analysis.category.includes("lao động") ? "bg-orange-100 text-orange-600" : "bg-pink-100 text-pink-600");
-                
+                const analysis = await callGemini("Hãy gợi ý tiêu đề và lời bình cho bức ảnh dự thi này.", true, currentImageData);
                 document.getElementById('photo-title').value = analysis.title;
                 document.getElementById('photo-caption').value = analysis.caption;
             };
             reader.readAsDataURL(file);
         }
 
+        // Gửi bài thi
         async function submitEntry() {
-            const name = document.getElementById('author-name').value;
+            const name = document.getElementById('author-name').value.trim();
             const unit = document.getElementById('author-unit').value;
-            const title = document.getElementById('photo-title').value;
-            const caption = document.getElementById('photo-caption').value;
+            const title = document.getElementById('photo-title').value.trim();
+            const caption = document.getElementById('photo-caption').value.trim();
             const btn = document.getElementById('btn-submit');
-            
-            if(!name || !unit || !title || !currentImageData) {
-                alert("Vui lòng điền đủ tên, đơn vị và chọn ảnh!");
-                return;
-            }
 
-            if(GOOGLE_SCRIPT_URL === "URL_WEB_APP_CUA_BAN") {
-                alert("Thông báo: Bạn cần thiết lập URL Web App Google Script để ảnh có thể lưu vào Drive thực tế.");
-                document.getElementById('success-modal').classList.remove('hidden');
+            if(!name || !unit || !currentImageData || !title) {
+                alert("Vui lòng điền đủ: Họ tên, Đơn vị, Tiêu đề và chọn Ảnh!");
                 return;
             }
 
             btn.disabled = true;
-            btn.classList.add('loading');
-            btn.innerHTML = '<i class="fas fa-spinner animate-spin"></i> ĐANG TẢI LÊN DRIVE...';
+            btn.innerHTML = '<i class="fas fa-spinner loading-spinner"></i> ĐANG TẢI LÊN DRIVE...';
 
             try {
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                const payload = JSON.stringify({
+                    author: name,
+                    unit: unit,
+                    title: title,
+                    caption: caption,
+                    image: currentImageData
+                });
+
+                // Mode no-cors để gửi đến Google Apps Script
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Dùng no-cors cho Google Script đơn giản
+                    mode: 'no-cors',
                     cache: 'no-cache',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        author: name,
-                        unit: unit,
-                        title: title,
-                        caption: caption,
-                        image: currentImageData
-                    })
+                    body: payload
                 });
-                
-                // Vì no-cors không đọc được response, chúng ta giả định thành công sau khi fetch xong
-                document.getElementById('success-modal').classList.remove('hidden');
-            } catch (e) {
-                console.error(e);
-                alert("Có lỗi xảy ra khi tải lên. Hãy kiểm tra kết nối mạng.");
-            } finally {
-                btn.disabled = false;
-                btn.classList.remove('loading');
-                btn.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> NỘP BÀI VÀ LƯU VÀO DRIVE';
-            }
-        }
 
-        function closeModal() {
-            document.getElementById('success-modal').classList.add('hidden');
-            location.reload();
+                // Giả định thành công sau 3 giây vì no-cors không trả về phản hồi
+                setTimeout(() => {
+                    document.getElementById('success-modal').classList.remove('hidden');
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> GỬI BÀI DỰ THI';
+                }, 3000);
+
+            } catch (e) {
+                alert("Đã xảy ra lỗi hệ thống: " + e.toString());
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> GỬI BÀI DỰ THI';
+            }
         }
 
         function downloadInfographic() {
             const element = document.getElementById('infographic-main');
-            html2canvas(element, { scale: 2, useCORS: true }).then(canvas => {
+            html2canvas(element, { 
+                scale: 2, 
+                useCORS: true,
+                allowTaint: true
+            }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Infographic-VNPT-Net.png';
+                link.download = 'CuocThiAnh-KTM-2026.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
